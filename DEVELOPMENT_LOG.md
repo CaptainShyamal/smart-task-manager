@@ -102,3 +102,13 @@ For each modification, document the following:
   - Installed `passport` and `passport-google-oauth20`.
   - Created Google strategy in `passport.js` to either find existing users by email or register them securely.
   - Implemented `/api/auth/google` and `/google/callback` endpoints.
+
+### [2026-04-18] Frontend Expansion & Vercel Deployment
+* **File Modified/Created:** `frontend/src/app/globals.css`, `frontend/src/app/settings/page.tsx`, `frontend/src/app/vital-task/page.tsx`, `frontend/src/app/my-task/page.tsx`, `frontend/src/app/categories/page.tsx`, `frontend/src/app/help/page.tsx`
+* **Action:** Created & Modified
+* **Function/Component Name:** App Pages & Tailwind CSS
+* **Rationale:** Completed End-to-End full app scaffolding as required. Fixed CSS inversion issues and deployed.
+* **Details:** 
+  - Overrode Next.js `prefers-color-scheme: dark` media queries to force the design into a cohesive Light Mode, fixing the "dark text on dark background" contrast bugs.
+  - Created all peripheral pages connected to the Sidebar: `Vital Tasks` (Urgent Priority View), `My Tasks` (Kanban Board View), `Categories`, `Settings` (With Premium QR Flow built in), and `Help`.
+  - Initialized Github repo locally and deployed frontend live to Vercel.
