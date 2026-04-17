@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: smart-task-manager
+    tier: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: smart-task-manager
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: smart-task-manager
+        tier: backend
+    spec:
+      containers:
+      - name: backend
+        image: smart-task-manager-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: REDIS_URL
+          value: "redis://redis-service:6379"
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: MONGODB_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: smart-task-manager
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000

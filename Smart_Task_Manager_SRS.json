@@ -1,0 +1,413 @@
+{
+  "document": {
+    "title": "Software Requirements Specification (SRS)",
+    "project_title": "Smart Task Manager (Advanced To-Do List System)",
+    "sections": {
+      "1_introduction": {
+        "section": "1",
+        "title": "Introduction",
+        "subsections": {
+          "1_1_purpose": {
+            "section": "1.1",
+            "title": "Purpose",
+            "content": "This document specifies the requirements for the Smart Task Manager system. The system is designed to provide advanced task management capabilities including prioritization, recurrence, reminders, and premium features."
+          },
+          "1_2_scope": {
+            "section": "1.2",
+            "title": "Scope",
+            "content": "The system enables users to create, manage, and organize tasks efficiently. It includes authentication, calendar integration, reminders, and a premium upgrade model."
+          }
+        }
+      },
+      "2_overall_description": {
+        "section": "2",
+        "title": "Overall Description",
+        "subsections": {
+          "2_1_product_perspective": {
+            "section": "2.1",
+            "title": "Product Perspective",
+            "content": "The system is a full-stack web application built using modern cloud-native technologies. It consists of a frontend interface, backend services, and cloud-hosted databases."
+          },
+          "2_2_user_classes": {
+            "section": "2.2",
+            "title": "User Classes",
+            "user_classes": [
+              {
+                "type": "Free Users",
+                "description": "Limited functionality with restrictions on tasks and reminders"
+              },
+              {
+                "type": "Premium Users",
+                "description": "Full access to all features"
+              },
+              {
+                "type": "Admin",
+                "description": "System monitoring and maintenance",
+                "note": "optional"
+              }
+            ]
+          }
+        }
+      },
+      "3_functional_requirements": {
+        "section": "3",
+        "title": "Functional Requirements",
+        "subsections": {
+          "3_1_task_management": {
+            "section": "3.1",
+            "title": "Task Management",
+            "features": [
+              "Add tasks",
+              "Edit tasks",
+              "Delete tasks",
+              "Mark tasks as completed"
+            ]
+          },
+          "3_2_priority_management": {
+            "section": "3.2",
+            "title": "Priority Management",
+            "features": [
+              "Assign priorities: Urgent, Daily, Important",
+              "Display tasks based on priority levels"
+            ],
+            "priority_levels": [
+              "Urgent",
+              "Daily",
+              "Important"
+            ]
+          },
+          "3_3_task_recurrence": {
+            "section": "3.3",
+            "title": "Task Recurrence",
+            "recurrence_types": [
+              "Daily recurrence",
+              "Weekly recurrence",
+              "Custom recurrence (specific days or intervals)"
+            ]
+          },
+          "3_4_authentication_and_profile_management": {
+            "section": "3.4",
+            "title": "Authentication and Profile Management",
+            "features": [
+              "User registration and login",
+              "Google OAuth login",
+              "JWT-based authentication",
+              "Profile update",
+              "Password change"
+            ]
+          },
+          "3_5_reminder_system": {
+            "section": "3.5",
+            "title": "Reminder System",
+            "features": [
+              "Alarm-based reminders",
+              "Notification support",
+              "Calendar integration"
+            ],
+            "constraints": {
+              "free_users": "Reminders limited to 7 days",
+              "premium_users": "Unlimited reminder scheduling"
+            }
+          },
+          "3_6_calendar_interface": {
+            "section": "3.6",
+            "title": "Calendar Interface",
+            "features": [
+              "Monthly view",
+              "Weekly view",
+              "Task-date mapping"
+            ]
+          },
+          "3_7_payment_and_premium_upgrade": {
+            "section": "3.7",
+            "title": "Payment and Premium Upgrade",
+            "features": [
+              "QR-based payment system",
+              "Account upgrade after successful payment verification"
+            ]
+          }
+        }
+      },
+      "4_non_functional_requirements": {
+        "section": "4",
+        "title": "Non-Functional Requirements",
+        "subsections": {
+          "4_1_performance": {
+            "section": "4.1",
+            "title": "Performance",
+            "requirements": [
+              "API response time under 300 milliseconds"
+            ]
+          },
+          "4_2_scalability": {
+            "section": "4.2",
+            "title": "Scalability",
+            "requirements": [
+              "Horizontal scaling using Kubernetes"
+            ]
+          },
+          "4_3_security": {
+            "section": "4.3",
+            "title": "Security",
+            "requirements": [
+              "JWT authentication",
+              "OAuth integration",
+              "Password hashing",
+              "HTTPS via CDN"
+            ]
+          },
+          "4_4_availability": {
+            "section": "4.4",
+            "title": "Availability",
+            "requirements": [
+              "High availability with cloud deployment"
+            ]
+          }
+        }
+      },
+      "5_system_architecture": {
+        "section": "5",
+        "title": "System Architecture",
+        "subsections": {
+          "5_1_architecture_overview": {
+            "section": "5.1",
+            "title": "Architecture Overview",
+            "flow": "Frontend (Vercel) → CDN (Cloudflare) → Backend (Dockerized Node.js) → Redis → MongoDB Atlas",
+            "components": [
+              "Frontend (Vercel)",
+              "CDN (Cloudflare)",
+              "Backend (Dockerized Node.js)",
+              "Redis",
+              "MongoDB Atlas"
+            ]
+          },
+          "5_2_technology_stack": {
+            "section": "5.2",
+            "title": "Technology Stack",
+            "frontend": [
+              "React / Next.js",
+              "Tailwind CSS"
+            ],
+            "backend": [
+              "Node.js with Express",
+              "JWT authentication",
+              "OAuth integration"
+            ],
+            "database": [
+              "MongoDB Atlas"
+            ],
+            "caching": [
+              "Redis"
+            ],
+            "devops": [
+              "Docker",
+              "Kubernetes",
+              "Cloudflare",
+              "Vercel"
+            ]
+          }
+        }
+      },
+      "6_database_design": {
+        "section": "6",
+        "title": "Database Design",
+        "collections": {
+          "users_collection": {
+            "collection_name": "Users",
+            "fields": [
+              "userId",
+              "name",
+              "email",
+              "password",
+              "isPremium",
+              "createdAt"
+            ]
+          },
+          "tasks_collection": {
+            "collection_name": "Tasks",
+            "fields": [
+              "taskId",
+              "userId",
+              "title",
+              "description",
+              "priority",
+              "recurrence",
+              "dueDate",
+              "completed",
+              "createdAt"
+            ]
+          },
+          "reminders_collection": {
+            "collection_name": "Reminders",
+            "fields": [
+              "reminderId",
+              "taskId",
+              "reminderTime",
+              "isActive"
+            ]
+          }
+        }
+      },
+      "7_api_requirements": {
+        "section": "7",
+        "title": "API Requirements",
+        "api_groups": {
+          "authentication_apis": {
+            "group": "Authentication APIs",
+            "endpoints": [
+              {
+                "method": "POST",
+                "path": "/register"
+              },
+              {
+                "method": "POST",
+                "path": "/login"
+              },
+              {
+                "method": "GET",
+                "path": "/auth/google"
+              }
+            ]
+          },
+          "task_apis": {
+            "group": "Task APIs",
+            "endpoints": [
+              {
+                "method": "POST",
+                "path": "/task"
+              },
+              {
+                "method": "GET",
+                "path": "/tasks"
+              },
+              {
+                "method": "PUT",
+                "path": "/task/{id}"
+              },
+              {
+                "method": "DELETE",
+                "path": "/task/{id}"
+              }
+            ]
+          },
+          "reminder_apis": {
+            "group": "Reminder APIs",
+            "endpoints": [
+              {
+                "method": "POST",
+                "path": "/reminder"
+              },
+              {
+                "method": "GET",
+                "path": "/reminders"
+              }
+            ]
+          },
+          "payment_api": {
+            "group": "Payment API",
+            "endpoints": [
+              {
+                "method": "POST",
+                "path": "/upgrade"
+              }
+            ]
+          }
+        }
+      },
+      "8_constraints": {
+        "section": "8",
+        "title": "Constraints",
+        "constraints": [
+          "Free users limited to 10 tasks per day",
+          "Reminder scheduling restricted to 7 days for free users",
+          "Premium subscription required for advanced features"
+        ]
+      },
+      "9_future_enhancements": {
+        "section": "9",
+        "title": "Future Enhancements",
+        "enhancements": [
+          "AI-based task recommendations",
+          "Productivity analytics",
+          "Voice-based task entry",
+          "Collaborative task management"
+        ]
+      },
+      "10_payment_flow": {
+        "section": "10",
+        "title": "Payment Flow",
+        "steps": [
+          {
+            "step": 1,
+            "description": "User selects upgrade option"
+          },
+          {
+            "step": 2,
+            "description": "QR code is displayed"
+          },
+          {
+            "step": 3,
+            "description": "User completes payment using UPI"
+          },
+          {
+            "step": 4,
+            "description": "Payment is verified"
+          },
+          {
+            "step": 5,
+            "description": "Account is upgraded to premium"
+          }
+        ]
+      },
+      "11_deployment_plan": {
+        "section": "11",
+        "title": "Deployment Plan",
+        "steps": [
+          "Containerization using Docker",
+          "Deployment using Kubernetes",
+          "Frontend hosting on Vercel",
+          "Database on MongoDB Atlas",
+          "CDN and security via Cloudflare"
+        ]
+      },
+      "12_tool_justification": {
+        "section": "12",
+        "title": "Tool Justification",
+        "tools": [
+          {
+            "tool": "JWT",
+            "justification": "Secure authentication"
+          },
+          {
+            "tool": "OAuth",
+            "justification": "Simplified login via Google"
+          },
+          {
+            "tool": "Docker",
+            "justification": "Containerization of services"
+          },
+          {
+            "tool": "Kubernetes",
+            "justification": "Scalable deployment"
+          },
+          {
+            "tool": "Redis",
+            "justification": "Fast caching and session management"
+          },
+          {
+            "tool": "MongoDB Atlas",
+            "justification": "Cloud database solution"
+          },
+          {
+            "tool": "Cloudflare",
+            "justification": "Security and CDN"
+          },
+          {
+            "tool": "Vercel",
+            "justification": "Frontend deployment"
+          }
+        ]
+      }
+    }
+  }
+}
