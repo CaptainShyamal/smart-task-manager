@@ -2,6 +2,7 @@
 
 ## Project Overview
 The Smart Task Manager is a full-stack web application designed to provide advanced task management capabilities. It offers features such as prioritization, recurrence, reminders, and a premium upgrade model, catering to both free and premium users. 
+<img width="1536" height="1024" alt="ChatGPT Image Apr 18, 2026, 01_37_49 AM" src="https://github.com/user-attachments/assets/e90d23cf-3ae1-4156-a573-4580ea89c1f4" />
 
 ## Key Features
 ### Task Management
